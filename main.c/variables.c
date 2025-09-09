@@ -33,5 +33,13 @@ int main()
     printf("Your favorite symbol is %c\n", symbol);
     printf("The currency is %c\n", currency);
 
+    char name[] = "Shahibul Faraz";
+    char food[] = "rice";
+    char email[] = "123@gmail.com";
+
+    printf("Hello %s\n", name);
+    printf("Your favorite food is %s\n", food);
+    printf("Your email is %s\n", email);
+
     return 0;
 }
