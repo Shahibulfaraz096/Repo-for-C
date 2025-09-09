@@ -17,5 +17,21 @@ int main()
     printf("The value of pi is %.15lf\n", pi);
     printf("The value of e is %.15lf\n", e);
 
+    float gpa = 2.5;
+    float price = 19.99;
+    float temperature = -10.1;
+
+    printf("Your gpa is %f\n", gpa);
+    printf("Your price is $%f\n", price);
+    printf("Your temperature is %.1fºF\n", temperature);
+
+    char grade = 'A';
+    char symbol = '!';
+    char currency = '$';
+
+    printf("Your grade is %c\n", grade);
+    printf("Your favorite symbol is %c\n", symbol);
+    printf("The currency is %c\n", currency);
+
     return 0;
 }
