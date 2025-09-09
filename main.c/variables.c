@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int main()
 {
@@ -40,6 +41,19 @@ int main()
     printf("Hello %s\n", name);
     printf("Your favorite food is %s\n", food);
     printf("Your email is %s\n", email);
+
+    bool isOnline = 1;
+    bool isStudent = false;
+    bool forSale = true;
+
+    if (forSale)
+    {
+        printf("That item is for sale");
+    }
+    else
+    {
+        printf("That item is NOT for sale");
+    }
 
     return 0;
 }
