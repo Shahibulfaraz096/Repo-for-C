@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -76,7 +75,8 @@ void listEmployees(const struct Employee *arr, int count)
     printf("\n---Employee List---\n");
     for (int i = 0; i < count; i++)
     {
-        printf("%d: ID=%d Name=\"%s\" Salary=%.2f\n", i, arr[i].ID, arr[i].Name, arr[i].salary);
+        printf("%d: ID=%d Name=\"%s\" Salary=%.2f\n",
+               i, arr[i].ID, arr[i].Name, arr[i].salary);
     }
 }
 
@@ -109,7 +109,8 @@ void searchEmployee(const struct Employee *arr, int count)
     int idx = findByID(arr, count, id);
     if (idx >= 0)
     {
-        printf("Found: ID=%d Name=\"%s\" Salary=%.2f\n", arr[idx].ID, arr[idx].Name, arr[idx].salary);
+        printf("Found: ID=%d Name=\"%s\" Salary=%.2f\n",
+               arr[idx].ID, arr[idx].Name, arr[idx].salary);
     }
     else
     {
@@ -125,19 +126,10 @@ void saveToFile(const struct Employee *arr, int count, const char *path)
         perror("fopen");
         return;
     }
-    if (fwrite(&count, sizeof(count), 1, f) != 1)
-    {
-        perror("fwrite");
-        fclose(f);
-        return;
-    }
+    fwrite(&count, sizeof(count), 1, f);
     if (count > 0)
-    {
-        if (fwrite(arr, sizeof(struct Employee), count, f) != (size_t)count)
-        {
-            perror("fwrite");
-        }
-    }
+        fwrite(arr, sizeof(struct Employee), count, f);
+
     fclose(f);
     printf("Saved %d employees to %s\n", count, path);
 }
@@ -151,28 +143,13 @@ void loadFromFile(struct Employee **arr, int *count, int *cap, const char *path)
         return;
     }
     int fileCount = 0;
-    if (fread(&fileCount, sizeof(fileCount), 1, f) != 1)
-    {
-        perror("fread");
-        fclose(f);
-        return;
-    }
-    struct Employee *tmp = malloc(fileCount * sizeof(struct Employee));
-    if (fileCount > 0 && tmp == NULL)
-    {
-        perror("malloc");
-        fclose(f);
-        return;
-    }
+    fread(&fileCount, sizeof(fileCount), 1, f);
+
+    struct Employee *tmp = NULL;
     if (fileCount > 0)
     {
-        if (fread(tmp, sizeof(struct Employee), fileCount, f) != (size_t)fileCount)
-        {
-            perror("fread");
-            free(tmp);
-            fclose(f);
-            return;
-        }
+        tmp = malloc(fileCount * sizeof(struct Employee));
+        fread(tmp, sizeof(struct Employee), fileCount, f);
     }
     fclose(f);
 
@@ -180,6 +157,7 @@ void loadFromFile(struct Employee **arr, int *count, int *cap, const char *path)
     *arr = tmp;
     *count = fileCount;
     *cap = fileCount;
+
     printf("Loaded %d employees from %s\n", *count, path);
 }
 
